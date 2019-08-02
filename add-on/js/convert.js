@@ -14,6 +14,22 @@ functions = {
     "sha256": function(s) {
         return SHA256.hex(s);
     },
+    "rot13":function(s){
+        var arr = [];
+        for(var i=0;i<s.length;++i){
+            var ch=s.charAt(i);
+            if(/^[A-Z]$/i.test(ch)){
+                if(ch == ch.toUpperCase()){
+                    arr.push(String.fromCharCode((ch.charCodeAt()-65+13)%26+65));
+                }else{
+                    arr.push(String.fromCharCode((ch.charCodeAt()-97+13)%26+97));
+                }
+            }else{
+                arr.push(ch);
+            }
+        }
+        return arr.join('');
+    },
     "base64encode": function(s) {
         return btoa(s);
     },
